@@ -25,10 +25,6 @@ bindkey -e
 autoload -U compinit
 compinit -u
 
-## コマンドのオプションを表示
-#autoload -U compinit
-#compinit
-
 ## cd後自動でlsする
 #function chpwd() { ls --color=auto }
 
@@ -36,7 +32,8 @@ compinit -u
 alias ctags='/usr/local/bin/ctags'
 
 ## エディタ(emacs)
-export EDITOR=/usr/bin/vim
+#export EDITOR=/usr/bin/vim
+TERM=xterm-color; export TERM
 
 ## diff
 ## colordiff: http://www.glidenote.com/archives/1403
@@ -53,6 +50,7 @@ alias tm='tmux -2'
 alias tml='tmux ls'
 alias tmk='tmux kill-session -t'
 alias tma='tmux attach -t'
+alias tmux="TERM=screen-256color-bce tmux"
 
 ## mysql(出力エディタはcat)
 alias mysql='mysql --pager='cat''
@@ -72,15 +70,15 @@ setopt share_history        # share command history data
 # gitブランチとステータスの表示
 # ------------------------------
 ## http://d.hatena.ne.jp/mollifier/20090814/p1
-#autoload -Uz vcs_info
-#zstyle ':vcs_info:*' formats '(%b)'
-#zstyle ':vcs_info:*' actionformats '(%b)[%a]'
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats '(%b)'
+zstyle ':vcs_info:*' actionformats '(%b)[%a]'
 
-#precmd () {
-#  psvar=()
-#  LANG=en_US.UTF-8 vcs_info
-#  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-#}
+precmd () {
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
 
 # ------------------------------
 # Look And Feel Settings
